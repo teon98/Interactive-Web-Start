@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS 3D</title>
+    <style>
+      .world {
+        width: 60vw;
+        height: 60vh;
+        background-color: #fff000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        perspective: 500px; /*원금감 속성 적용*/
+      }
+      .card {
+        position: relative;
+        width: 100px;
+        height: 150px;
+        margin: 1em;
+        transform: rotateY(
+          0deg
+        ); /*처음 렌더링 시 card자체가 준비할 수 있도록 명시해 주는 것이 좋다.*/
+        transition: 1s;
+        transform-style: preserve-3d; /*card-side에도 3D가 잘 적용될 수 있도록 설정해줌.*/
+        transform-origin: left; /*회전축 기준점을 바꿀 수 있다.*/
+      }
+      .card-side {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.5em;
+        font-size: 1.5rem;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden; /*뒷면이 보이지 않게 하는 속성*/
+      }
+      .card-side-front {
+        z-index: 1;
+        background: white;
+      }
+      .card-side-back {
+        transform: rotateY(-180deg);
+        background: red;
+      }
+      .world:hover .card {
+        transform: rotateY(-180deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="world">
+      <div class="card">
+        <div class="card-side card-side-front">F</div>
+        <div class="card-side card-side-back">B</div>
+      </div>
+    </div>
+  </body>
+</html>
